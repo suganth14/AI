@@ -61,7 +61,7 @@ def all_move(i,j,prev_move,lvl,dit):
     if(i-1>=0 and prev_move!=1):
         dit[arr[i][j]],dit[arr[i-1][j]] = dit[arr[i-1][j]],dit[arr[i][j]]
         Arr = build_arr(dit)
-        val1 = manhattan(dit) + 1
+        val1 = manhattan(dit) + 1 +lvl
         min_dit = dit.copy()
         build_arr(dit)
         #h_val,lvl,random_num,i,j,prev_move,dit,arr.copy()
@@ -71,7 +71,7 @@ def all_move(i,j,prev_move,lvl,dit):
     if(i+1<=2 and prev_move!=2):
         dit[arr[i][j]],dit[arr[i+1][j]] = dit[arr[i+1][j]],dit[arr[i][j]]
         Arr = build_arr(dit)
-        val2 = manhattan(dit)+ 1
+        val2 = manhattan(dit)+ 1 + lvl
         min_dit = dit.copy()
         heapq.heappush(heap,[val2,lvl+1,random.randint(0,1000),i+1,j,1,min_dit,Arr])
         dit[arr[i][j]],dit[arr[i+1][j]] = dit[arr[i+1][j]],dit[arr[i][j]]
@@ -79,7 +79,7 @@ def all_move(i,j,prev_move,lvl,dit):
     if(j-1>=0 and prev_move!=3):
         dit[arr[i][j]],dit[arr[i][j-1]] = dit[arr[i][j-1]],dit[arr[i][j]]
         Arr = build_arr(dit)
-        val3 = manhattan(dit)+ 1
+        val3 = manhattan(dit)+ 1 + lvl
         min_dit = dit.copy()
         heapq.heappush(heap,[val3,lvl+1,random.randint(0,1000),i,j-1,4,min_dit,Arr])
         dit[arr[i][j]],dit[arr[i][j-1]] = dit[arr[i][j-1]],dit[arr[i][j]]
@@ -87,7 +87,7 @@ def all_move(i,j,prev_move,lvl,dit):
     if(j+1<=2 and prev_move!=4):
         dit[arr[i][j]],dit[arr[i][j+1]] = dit[arr[i][j+1]],dit[arr[i][j]]
         Arr = build_arr(dit)
-        val4 = manhattan(dit)+ 1
+        val4 = manhattan(dit)+ 1 + lvl
         min_dit = dit.copy()
         heapq.heappush(heap,[val4,lvl+1,random.randint(0,1000),i,j+1,3,min_dit,Arr])
         dit[arr[i][j]],dit[arr[i][j+1]] = dit[arr[i][j+1]],dit[arr[i][j]]
