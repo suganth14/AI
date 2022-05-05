@@ -66,16 +66,14 @@ def de_fuzzy(val,A):
     denom = 0
     if(val==0):
         return
-    i=0
     for key in A:
         arr = throttle[key]
         a = arr[0]
-        b = get_intersection(arr[0],0,arr[1],1,val[i])
-        c = get_intersection(arr[1],1,arr[2],0,val[i])
+        b = get_intersection(arr[0],0,arr[1],1,val)
+        c = get_intersection(arr[1],1,arr[2],0,val)
         d = arr[2]
         denom+=get_trapA(a,b,c,d,val[i])
         num+=(get_trapA(a,b,c,d,val[i])*((d+a)//2))
-        i+=1
     return num/denom
         
     
@@ -130,10 +128,10 @@ createPlot("Normalized Throttle Control")
 
 #print(fuzzy("ZE","NM",speed_diff,acc),[])
 A = []
-val = []
+val = 0
 for i in rules_list:
     if fuzzy(i[0],i[1],speed_diff,acc) > 0:
-        val.append(fuzzy(i[0],i[1],speed_diff,acc))
+        val= max(fuzzy(i[0],i[1],speed_diff,acc), val)
         A.append(i[2])
 
 print(A)        
