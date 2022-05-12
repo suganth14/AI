@@ -5,20 +5,35 @@ w = [-0.3,1]
 
 f = True
 alpha = 0.01
-# while(f):
-for i in range(len(inst)):
-    x = 0
-    for j in range(len(w)):
-        x += inst[i][j+1]*w[j]
-    print(i+1," : x ->",x)
-    if x > 0 and inst[i][0] != "mi":
+loopcondn = 0
+while(f):
+    for i in range(len(inst)):
+        
+        if(loopcondn>=len(inst)-1):
+            f = False
+            break
+        
+        x = 0
         for j in range(len(w)):
-            w[j] = w[j] + alpha*(-1)*inst[i][j+1]
-        print(w)
-        break
-    if x < 0 and inst[i][0] != "a":
-        for j in range(len(w)):
-            w[j] = w[j] + alpha*(1)*inst[i][j+1]
-        print(w)
-        break
-    
+            x += inst[i][j+1]*w[j]
+
+        if x > 0:
+            if inst[i][0] != "mi" :
+                for j in range(len(w)):
+                    w[j] = w[j] + alpha*(-1)*inst[i][j+1]
+                    loopcondn = 0
+                break
+            else:
+                loopcondn+=1
+                continue
+        if x < 0 :
+            if inst[i][0] != "a":
+                for j in range(len(w)):
+                    w[j] = w[j] + alpha*(1)*inst[i][j+1]
+                    loopcondn = 0
+                break
+            else:
+                loopcondn+=1
+                continue
+
+print("Updated W : ",w)
